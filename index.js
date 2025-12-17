@@ -114,3 +114,128 @@ function gameObject() {
         },
     };
 }
+
+// 1. numPointsScored
+function numPointsScored(playerName) {
+    const game = gameObject();
+    
+    if (game.home.players[playerName]) {
+        return game.home.players[playerName].points;
+    }
+    
+    if (game.away.players[playerName]) {
+        return game.away.players[playerName].points;
+    }
+    
+    
+}
+
+// 2. shoeSize
+function shoeSize(playerName) {
+    const game = gameObject();
+    
+    if (game.home.players[playerName]) {
+        return game.home.players[playerName].shoe;
+    }
+    
+    if (game.away.players[playerName]) {
+        return game.away.players[playerName].shoe;
+    }
+}
+
+// 3. teamColors
+function teamColors(teamName) {
+    const game = gameObject();
+    
+    if (game.home.teamName === teamName) {
+        return game.home.colors;
+    }
+    
+    if (game.away.teamName === teamName) {
+        return game.away.colors;
+    }
+}
+
+// 4. teamNames
+function teamNames() {
+    const game = gameObject();
+    return [game.home.teamName, game.away.teamName];
+}
+
+// 5. playerNumbers
+function playerNumbers(teamName) {
+    const game = gameObject();
+    const numbers = [];
+    
+    if (game.home.teamName === teamName) {
+        for (const player in game.home.players) {
+            numbers.push(game.home.players[player].number);
+        }
+    }
+    
+    if (game.away.teamName === teamName) {
+        for (const player in game.away.players) {
+            numbers.push(game.away.players[player].number);
+        }
+    }
+    
+    return numbers;
+}
+
+// 6. playerStats
+function playerStats(playerName) {
+    const game = gameObject();
+    
+    if (game.home.players[playerName]) {
+        return game.home.players[playerName];
+    }
+    
+    if (game.away.players[playerName]) {
+        return game.away.players[playerName];
+    }
+    
+
+}
+
+// 7. bigShoeRebounds
+function bigShoeRebounds() {
+    const game = gameObject();
+    let biggestShoe = 0;
+    let playerWithBiggestShoe = null;
+    
+    // Check home team
+    for (const player in game.home.players) {
+        if (game.home.players[player].shoe > biggestShoe) {
+            biggestShoe = game.home.players[player].shoe;
+            playerWithBiggestShoe = player;
+        }
+    }
+    
+    // Check away team
+    for (const player in game.away.players) {
+        if (game.away.players[player].shoe > biggestShoe) {
+            biggestShoe = game.away.players[player].shoe;
+            playerWithBiggestShoe = player;
+        }
+    }
+    
+    // Get rebounds
+    if (game.home.players[playerWithBiggestShoe]) {
+        return game.home.players[playerWithBiggestShoe].rebounds;
+    }
+    if (game.away.players[playerWithBiggestShoe]) {
+        return game.away.players[playerWithBiggestShoe].rebounds;
+    }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        numPointsScored,
+        shoeSize,
+        teamColors,
+        teamNames,
+        playerNumbers,
+        playerStats,
+        bigShoeRebounds
+    };
+}       

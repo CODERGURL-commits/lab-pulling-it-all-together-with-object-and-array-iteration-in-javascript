@@ -1,0 +1,21 @@
+const chai = require('chai')
+const sinon = require('sinon')
+global.expect = chai.expect
+const fs = require('fs')
+const path = require('path')
+const assert = require('assert')
+
+// Since jsdom-global will handle the DOM setup,
+// we just need to read the files for reference
+const html = fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf-8')
+const js = fs.readFileSync(path.resolve(__dirname, '..', 'index.js'), 'utf-8')
+
+module.exports = {
+  assert,
+  chai,
+  sinon,
+  fs,
+  path,
+  html,
+  js
+}
